@@ -9,7 +9,6 @@ class Articles extends Component {
 
   render() {
     const { articles } = this.state;
-    console.log(articles);
     return (
       <div>
         <h1>Articles</h1>
