@@ -10,7 +10,6 @@ class SingleArticle extends Component {
   };
   render() {
     const { article, votes, comments } = this.state;
-    console.log(comments);
     return (
       <div>
         <div>
