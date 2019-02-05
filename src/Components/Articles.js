@@ -15,12 +15,13 @@ class Articles extends Component {
         <h1>Articles</h1>
         {articles.map(article => {
           return (
-            <p>
-              Title : {article.title}
-              <br /> Author : {article.author}
-              <br />{" "}
-            </p>
-            // <Link to = {`/articles/${article.article_id}`} >View Article</Link>
+            <React.Fragment key={article.article_id}>
+              <p>
+                Title : {article.title}
+                <br /> Author : {article.author}
+              </p>
+              <Link to={`/articles/${article.article_id}`}>View Article</Link>
+            </React.Fragment>
           );
         })}
       </div>
@@ -33,7 +34,7 @@ class Articles extends Component {
 
   getArticles = () => {
     axios
-      .get("https://nc-knews777.herokuapp.com/api/articles")
+      .get("https://nc-knews777.herokuapp.com/api/articles?limit=1000000")
       .then(({ data }) => {
         this.setState({
           articles: data.articles
