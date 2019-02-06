@@ -10,7 +10,6 @@ class Articles extends Component {
 
   render() {
     const { articles, topics } = this.state;
-    // console.log(articles);
     return (
       <div>
         <h1>Articles</h1>
@@ -30,6 +29,20 @@ class Articles extends Component {
                     </option>
                   );
                 })}
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Sort by:
+            <select onChange={this.sortByFunc}>
+              <option key={"disabled"} value={null} defaultValue disabled>
+                Choose criteria
+              </option>
+              <option value="Default">Default</option>
+              <option value="created_at">Date created</option>
+              <option value="comment_count">Comment count</option>
+              <option value="votes">Votes</option>
             </select>
           </label>
         </div>
@@ -80,6 +93,23 @@ class Articles extends Component {
       axios
         .get(
           `https://nc-knews777.herokuapp.com/api/topics/${topic}/articles?limit=1000000`
+        )
+        .then(({ data }) => {
+          this.setState({
+            articles: data.articles
+          });
+        });
+    } else {
+      this.getArticles();
+    }
+  };
+
+  sortByFunc = e => {
+    const criteria = e.target.value;
+    if (criteria !== "Default") {
+      axios
+        .get(
+          `https://nc-knews777.herokuapp.com/api/articles?limit=1000000&&sort_by=${criteria}`
         )
         .then(({ data }) => {
           this.setState({

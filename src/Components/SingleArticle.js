@@ -5,9 +5,7 @@ import Comments from "./Comments";
 class SingleArticle extends Component {
   state = {
     article: null,
-    votesModifier: 0,
-    comments: null,
-    test: null
+    votesModifier: 0
   };
   render() {
     const { article, votesModifier, comments } = this.state;
@@ -23,10 +21,18 @@ class SingleArticle extends Component {
         </div>
         <div>
           <p>Article Votes: {article && article.votes + votesModifier}</p>
-          <button type="button" onClick={() => this.voteToArticle(1)}>
+          <button
+            disabled={votesModifier === 1}
+            type="button"
+            onClick={() => this.voteToArticle(1)}
+          >
             Like
           </button>
-          <button type="button" onClick={() => this.voteToArticle(-1)}>
+          <button
+            disabled={votesModifier === -1}
+            type="button"
+            onClick={() => this.voteToArticle(-1)}
+          >
             Dislike
           </button>
         </div>

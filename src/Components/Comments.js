@@ -17,12 +17,14 @@ class Comments extends Component {
         </p>
         <p>Comment Votes : {comment.votes + commentModifier}</p>
         <button
+          disabled={commentModifier === 1}
           type="button"
           onClick={() => this.voteToComment(comment.comment_id, 1)}
         >
           Like
         </button>
         <button
+          disabled={commentModifier === -1}
           type="button"
           onClick={() => this.voteToComment(comment.comment_id, -1)}
         >
