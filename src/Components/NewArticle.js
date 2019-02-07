@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { navigate } from "@reach/router";
 
 class NewArticle extends Component {
   state = {
@@ -139,11 +140,7 @@ class NewArticle extends Component {
           `https://nc-knews777.herokuapp.com/api/topics/${selectedTopic}/articles`,
           body
         )
-        .then(() =>
-          alert(
-            "Great! your article has been added to our prestigious site. To view you article please visit our articles page."
-          )
-        );
+        .then(() => navigate("/articles"));
     }
   };
 

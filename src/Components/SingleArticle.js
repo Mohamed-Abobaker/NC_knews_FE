@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Comments from "./Comments";
+import { navigate } from "@reach/router";
 
 class SingleArticle extends Component {
   state = {
     article: null,
-    votesModifier: 0
+    votesModifier: 0,
+    comments: [],
+    newComment: ""
   };
   render() {
-    const { article, votesModifier, comments } = this.state;
+    const { article, votesModifier, comments, newComment } = this.state;
     return (
       <div>
         <div>
@@ -35,9 +38,20 @@ class SingleArticle extends Component {
           >
             Dislike
           </button>
+          <button type="button" onClick={this.deleteArticle}>
+            Delete Article
+          </button>
         </div>
         <div>
           <h3>Comments</h3>
+          <form onSubmit={this.postNewComment}>
+            <input
+              onChange={this.handleChange}
+              type="text"
+              value={newComment}
+            />
+            <button type="sumbit">submit comment</button>
+          </form>
           {comments &&
             comments.map(comment => {
               return (
@@ -91,6 +105,40 @@ class SingleArticle extends Component {
           votesModifier: this.state.votesModifier + vote
         });
       });
+  };
+
+  handleChange = e => {
+    this.setState({
+      newComment: e.target.value
+    });
+  };
+
+  postNewComment = e => {
+    e.preventDefault();
+    const { id } = this.props;
+    const { newComment } = this.state;
+    const username = "grumpy19";
+    const body = { body: newComment, username };
+    if (newComment) {
+      axios
+        .post(
+          `https://nc-knews777.herokuapp.com/api/articles/${id}/comments`,
+          body
+        )
+        .then(({ data }) => {
+          this.setState({
+            comments: [data.comment, ...this.state.comments],
+            newComment: ""
+          });
+        });
+    }
+  };
+  deleteArticle = () => {
+    console.log("deleteArticle");
+    const { id } = this.props;
+    axios
+      .delete(`https://nc-knews777.herokuapp.com/api/articles/${id}`)
+      .then(() => navigate("/articles"));
   };
 }
 
