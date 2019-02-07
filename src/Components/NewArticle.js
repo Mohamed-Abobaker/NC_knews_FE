@@ -4,64 +4,92 @@ import axios from "axios";
 class NewArticle extends Component {
   state = {
     topics: [],
-    newSlugInput: "",
     selectedTopic: "",
-    newDescriptionInput: ""
+    newSlugInput: "",
+    newDescriptionInput: "",
+    newArticleTitle: "",
+    newArticleBody: ""
   };
+
   render() {
-    const { topics, newSlugInput, newDescriptionInput } = this.state;
+    const {
+      topics,
+      newSlugInput,
+      newDescriptionInput,
+      newArticleBody,
+      newArticleTitle
+    } = this.state;
     return (
-      <div>
+      <div key={"newArticlePage"}>
         <h1>Write a new Article</h1>
-        <div>
-          <label>
-            Choose the topic of your new article
-            <select onChange={this.topicChange}>
-              <option selected disabled key={"disabled"} value={null}>
-                Choose topic
-              </option>
-              {topics &&
-                topics.map(topic => {
-                  return (
-                    <option key={topic.slug} value={topic.slug}>
-                      {topic.slug}
-                    </option>
-                  );
-                })}
-            </select>
-          </label>
+        <div key={"addNewArticle"}>
+          <p>First choose the topic of your new article</p>
+          <select onChange={this.topicChange}>
+            <option selected disabled key={"disabled"} value={null}>
+              Choose topic
+            </option>
+            {topics &&
+              topics.map(topic => {
+                return (
+                  <option key={topic.slug} value={topic.slug}>
+                    {topic.slug}
+                  </option>
+                );
+              })}
+          </select>
+          <p>
+            {`(psst if you wish to add an article to a topic that does not yet exist you can add a new topic using the form at the bottom of the page)`}
+          </p>
+          <form onSubmit={this.postNewArticle}>
+            <input
+              placeholder="article title"
+              type="text"
+              onChange={this.handleChange}
+              value={newArticleTitle}
+              id={"newArticleTitle"}
+            />
+            <input
+              placeholder="article body"
+              type="text"
+              onChange={this.handleChange}
+              value={newArticleBody}
+              id={"newArticleBody"}
+            />
+            <button type="submit">Submit new article</button>
+            {/* {'finish this form for the article!'} */}
+          </form>
         </div>
-        <p> If you wish to add a new topic please sumbit here</p>
+        <p>
+          {" "}
+          If you wish to add a new topic please enter title and description then
+          submit
+        </p>
         <form onSubmit={this.addTopic}>
           <input
             placeholder="New Topic Title"
             type="text"
-            onChange={this.handleSlugChange}
+            onChange={this.handleChange}
             value={newSlugInput}
+            id={"newSlugInput"}
           />
           <input
             placeholder="New Topic Description"
             type="text"
-            onChange={this.handleDescriptionChange}
+            onChange={this.handleChange}
             value={newDescriptionInput}
+            id={"newDescriptionInput"}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Submit new topic</button>
         </form>
       </div>
     );
   }
 
-  handleSlugChange = e => {
-    const input = e.target.value;
+  handleChange = event => {
+    const key = event.target.id;
+    const input = event.target.value;
     this.setState({
-      newSlugInput: input
-    });
-  };
-
-  handleDescriptionChange = e => {
-    const input = e.target.value;
-    this.setState({
-      newDescriptionInput: input
+      [key]: input
     });
   };
 
@@ -72,9 +100,51 @@ class NewArticle extends Component {
       description: newDescriptionInput,
       slug: newSlugInput
     };
-    axios
-      .post("https://nc-knews777.herokuapp.com/api/topics", newTopic)
-      .then(console.log);
+    if (!newSlugInput || !newDescriptionInput) {
+      alert(
+        "Please insure you have inserted a new topic title and description before submitting, thank you"
+      );
+    } else {
+      axios
+        .post("https://nc-knews777.herokuapp.com/api/topics", newTopic)
+        .then(({ data }) => {
+          this.setState({
+            topics: [data.topic, ...this.state.topics],
+            newSlugInput: "",
+            newDescriptionInput: ""
+          });
+        });
+    }
+  };
+
+  topicChange = e => {
+    const topicChosen = e.target.value;
+    this.setState({
+      selectedTopic: topicChosen
+    });
+  };
+
+  postNewArticle = e => {
+    e.preventDefault();
+    const { newArticleBody, newArticleTitle, selectedTopic } = this.state;
+    const username = "grumpy19";
+    const body = { body: newArticleBody, title: newArticleTitle, username };
+    if (!newArticleBody || !newArticleTitle || !selectedTopic) {
+      alert(
+        "Please insert both article title and body, and insure you have picked a topic for your new article, thank you"
+      );
+    } else {
+      axios
+        .post(
+          `https://nc-knews777.herokuapp.com/api/topics/${selectedTopic}/articles`,
+          body
+        )
+        .then(() =>
+          alert(
+            "Great! your article has been added to our prestigious site. To view you article please visit our articles page."
+          )
+        );
+    }
   };
 
   componentDidMount() {

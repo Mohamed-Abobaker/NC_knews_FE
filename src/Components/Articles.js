@@ -5,7 +5,9 @@ import { Link } from "@reach/router";
 class Articles extends Component {
   state = {
     articles: [],
-    topics: null
+    topics: [],
+    chosenTopic: "All",
+    criteria: "Default"
   };
 
   render() {
@@ -16,7 +18,7 @@ class Articles extends Component {
         <div>
           <label>
             Filter Articles by Topic:
-            <select onChange={this.topicChange}>
+            <select onChange={this.assignTopic}>
               <option key={"disabled"} value={null} defaultValue disabled>
                 Choose topic
               </option>
@@ -35,7 +37,7 @@ class Articles extends Component {
         <div>
           <label>
             Sort by:
-            <select onChange={this.sortByFunc}>
+            <select onChange={this.assignSortBy}>
               <option key={"disabled"} value={null} defaultValue disabled>
                 Choose criteria
               </option>
@@ -87,38 +89,41 @@ class Articles extends Component {
       });
   };
 
-  topicChange = e => {
-    const topic = e.target.value;
-    if (topic !== "All") {
-      axios
-        .get(
-          `https://nc-knews777.herokuapp.com/api/topics/${topic}/articles?limit=1000000`
-        )
-        .then(({ data }) => {
-          this.setState({
-            articles: data.articles
-          });
-        });
-    } else {
-      this.getArticles();
-    }
+  assignTopic = e => {
+    this.setState(
+      {
+        chosenTopic: e.target.value
+      },
+      () => this.sortArticles()
+    );
   };
 
-  sortByFunc = e => {
-    const criteria = e.target.value;
-    if (criteria !== "Default") {
-      axios
-        .get(
-          `https://nc-knews777.herokuapp.com/api/articles?limit=1000000&&sort_by=${criteria}`
-        )
-        .then(({ data }) => {
-          this.setState({
-            articles: data.articles
-          });
-        });
-    } else {
-      this.getArticles();
+  assignSortBy = e => {
+    this.setState(
+      {
+        criteria: e.target.value
+      },
+      () => this.sortArticles()
+    );
+  };
+
+  sortArticles = () => {
+    const { chosenTopic, criteria } = this.state;
+    let url = `https://nc-knews777.herokuapp.com/api/articles?limit=1000000`;
+    if (chosenTopic !== "All" && criteria !== "Default") {
+      url = `https://nc-knews777.herokuapp.com/api/topics/${chosenTopic}/articles?limit=1000000&&sort_by=${criteria}`;
     }
+    if (chosenTopic === "All" && criteria !== "Default") {
+      url = `https://nc-knews777.herokuapp.com/api/articles?limit=1000000&&sort_by=${criteria}`;
+    }
+    if (chosenTopic !== "All" && criteria === "Default") {
+      url = `https://nc-knews777.herokuapp.com/api/topics/${chosenTopic}/articles?limit=1000000`;
+    }
+    axios.get(url).then(({ data }) => {
+      this.setState({
+        articles: data.articles
+      });
+    });
   };
 }
 
