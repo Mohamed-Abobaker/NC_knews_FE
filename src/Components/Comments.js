@@ -30,6 +30,9 @@ class Comments extends Component {
         >
           Dislike
         </button>
+        <button type="button" onClick={this.deleteComment}>
+          Delete Comment
+        </button>
       </div>
     );
   }
@@ -47,6 +50,16 @@ class Comments extends Component {
           commentModifier: this.state.commentModifier + num
         });
       });
+  };
+  deleteComment = e => {
+    console.log("here");
+    const { id } = this.props;
+    const comm_id = this.state.comment.comment_id;
+    axios
+      .delete(
+        `https://nc-knews777.herokuapp.com/api/articles/${id}/comments/${comm_id}`
+      )
+      .then(() => this.props.commentFunc());
   };
 }
 

@@ -59,6 +59,7 @@ class SingleArticle extends Component {
                   key={comment.comment_id}
                   id={article && article.article_id}
                   comment={comment}
+                  commentFunc={this.getComments}
                 />
               );
             })}
