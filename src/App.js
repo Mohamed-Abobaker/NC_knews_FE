@@ -22,10 +22,10 @@ class App extends Component {
           <Nav />
           <Router>
             <Home path="/" user={user} />
-            <Articles path="/articles" />
-            <SingleArticle path="/articles/:id" />
+            <Articles path="/articles" user={user} />
+            <SingleArticle path="/articles/:id" user={user} />
             <Users path="/users" />
-            <NewArticle path="articles/new_article" />
+            <NewArticle path="articles/new_article" user={user} />
             <NotFound default />
           </Router>
         </Auth>

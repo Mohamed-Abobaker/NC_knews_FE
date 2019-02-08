@@ -128,7 +128,7 @@ class NewArticle extends Component {
   postNewArticle = e => {
     e.preventDefault();
     const { newArticleBody, newArticleTitle, selectedTopic } = this.state;
-    const username = "grumpy19";
+    const username = this.props.user;
     const body = { body: newArticleBody, title: newArticleTitle, username };
     if (!newArticleBody || !newArticleTitle || !selectedTopic) {
       alert(

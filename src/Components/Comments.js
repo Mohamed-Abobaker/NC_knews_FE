@@ -9,6 +9,8 @@ class Comments extends Component {
 
   render() {
     const { comment, commentModifier } = this.state;
+    const isUser =
+      this.props.user === (comment && comment.author) ? true : false;
     return (
       <div>
         <p>
@@ -30,9 +32,11 @@ class Comments extends Component {
         >
           Dislike
         </button>
-        <button type="button" onClick={this.deleteComment}>
-          Delete Comment
-        </button>
+        {isUser && (
+          <button type="button" onClick={this.deleteComment}>
+            Delete Comment
+          </button>
+        )}
       </div>
     );
   }

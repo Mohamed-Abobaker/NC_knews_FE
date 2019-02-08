@@ -2,16 +2,30 @@ import React, { Component } from "react";
 import axios from "axios";
 import Comments from "./Comments";
 import { navigate } from "@reach/router";
+import ArticleNotFound from "./ArticleNotFound";
 
 class SingleArticle extends Component {
   state = {
     article: null,
     votesModifier: 0,
     comments: [],
-    newComment: ""
+    newComment: "",
+    hasError: false
   };
   render() {
-    const { article, votesModifier, comments, newComment } = this.state;
+    const {
+      article,
+      votesModifier,
+      comments,
+      newComment,
+      hasError
+    } = this.state;
+
+    const isUser =
+      this.props.user === (article && article.author) ? true : false;
+
+    if (hasError) return <ArticleNotFound />;
+
     return (
       <div>
         <div>
@@ -38,9 +52,11 @@ class SingleArticle extends Component {
           >
             Dislike
           </button>
-          <button type="button" onClick={this.deleteArticle}>
-            Delete Article
-          </button>
+          {isUser && (
+            <button type="button" onClick={this.deleteArticle}>
+              Delete Article
+            </button>
+          )}
         </div>
         <div>
           <h3>Comments</h3>
@@ -56,6 +72,7 @@ class SingleArticle extends Component {
             comments.map(comment => {
               return (
                 <Comments
+                  user={this.props.user}
                   key={comment.comment_id}
                   id={article && article.article_id}
                   comment={comment}
@@ -81,6 +98,11 @@ class SingleArticle extends Component {
         this.setState({
           votes: data.article.votes,
           article: data.article
+        });
+      })
+      .catch(err => {
+        this.setState({
+          hasError: true
         });
       });
   };
@@ -118,7 +140,7 @@ class SingleArticle extends Component {
     e.preventDefault();
     const { id } = this.props;
     const { newComment } = this.state;
-    const username = "grumpy19";
+    const username = this.props.user;
     const body = { body: newComment, username };
     if (newComment) {
       axios
@@ -127,6 +149,7 @@ class SingleArticle extends Component {
           body
         )
         .then(({ data }) => {
+          console.log(data.comment);
           this.setState({
             comments: [data.comment, ...this.state.comments],
             newComment: ""
@@ -135,7 +158,6 @@ class SingleArticle extends Component {
     }
   };
   deleteArticle = () => {
-    console.log("deleteArticle");
     const { id } = this.props;
     axios
       .delete(`https://nc-knews777.herokuapp.com/api/articles/${id}`)

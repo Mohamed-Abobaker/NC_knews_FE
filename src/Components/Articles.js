@@ -12,9 +12,12 @@ class Articles extends Component {
 
   render() {
     const { articles, topics } = this.state;
+    const { user } = this.props;
     return (
       <div>
         <h1>Articles</h1>
+        <p>Hey {user}, wanna add a new article?</p>
+        <Link to="/articles/new_article">Add new article</Link>{" "}
         <div>
           <label>
             Filter Articles by Topic:
@@ -55,6 +58,7 @@ class Articles extends Component {
               <p>
                 Title : {article.title}
                 <br /> Author : {article.author}
+                <br /> Topic : {article.topic}
               </p>
               <Link to={`/articles/${article.article_id}`}>View Article</Link>
             </React.Fragment>
