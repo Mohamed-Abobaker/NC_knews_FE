@@ -29,6 +29,11 @@ class SingleArticle extends Component {
     return (
       <div>
         <div>
+          <button type="button" onClick={() => this.props.logoutFunc()}>
+            Logout
+          </button>
+        </div>
+        <div>
           <h1>{article && article.title}</h1>
           <p>{article && article.body}</p>
           <p>
@@ -77,6 +82,7 @@ class SingleArticle extends Component {
                   id={article && article.article_id}
                   comment={comment}
                   commentFunc={this.getComments}
+                  handleCommentDelete={this.handleCommentDelete}
                 />
               );
             })}
@@ -149,7 +155,6 @@ class SingleArticle extends Component {
           body
         )
         .then(({ data }) => {
-          console.log(data.comment);
           this.setState({
             comments: [data.comment, ...this.state.comments],
             newComment: ""
@@ -162,6 +167,15 @@ class SingleArticle extends Component {
     axios
       .delete(`https://nc-knews777.herokuapp.com/api/articles/${id}`)
       .then(() => navigate("/articles"));
+  };
+
+  handleCommentDelete = id => {
+    const filteredComments = this.state.comments.filter(comment => {
+      return comment.comment_id !== id;
+    });
+    this.setState({
+      comments: filteredComments
+    });
   };
 }
 

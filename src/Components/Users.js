@@ -7,13 +7,17 @@ class Users extends Component {
   };
   render() {
     const { users } = this.state;
-    console.log(users);
     return (
       <div>
+        <div>
+          <button type="button" onClick={() => this.props.logoutFunc()}>
+            Logout
+          </button>
+        </div>
         <h1>Users</h1>{" "}
         {users.map(user => {
           return (
-            <div key = {user.username}>
+            <div key={user.username}>
               <img
                 src={user.avatar_url}
                 alt="Avatar pic"

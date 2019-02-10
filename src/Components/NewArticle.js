@@ -22,6 +22,11 @@ class NewArticle extends Component {
     } = this.state;
     return (
       <div key={"newArticlePage"}>
+        <div>
+          <button type="button" onClick={() => this.props.logoutFunc()}>
+            Logout
+          </button>
+        </div>
         <h1>Write a new Article</h1>
         <div key={"addNewArticle"}>
           <p>First choose the topic of your new article</p>
@@ -43,6 +48,7 @@ class NewArticle extends Component {
           </p>
           <form onSubmit={this.postNewArticle}>
             <input
+              required
               placeholder="article title"
               type="text"
               onChange={this.handleChange}
@@ -50,6 +56,7 @@ class NewArticle extends Component {
               id={"newArticleTitle"}
             />
             <input
+              required
               placeholder="article body"
               type="text"
               onChange={this.handleChange}
@@ -69,11 +76,13 @@ class NewArticle extends Component {
           <input
             placeholder="New Topic Title"
             type="text"
+            required
             onChange={this.handleChange}
             value={newSlugInput}
             id={"newSlugInput"}
           />
           <input
+            required
             placeholder="New Topic Description"
             type="text"
             onChange={this.handleChange}
@@ -99,7 +108,7 @@ class NewArticle extends Component {
     const { newSlugInput, newDescriptionInput } = this.state;
     const newTopic = {
       description: newDescriptionInput,
-      slug: newSlugInput
+      slug: newSlugInput.toLowerCase()
     };
     if (!newSlugInput || !newDescriptionInput) {
       alert(
@@ -132,7 +141,7 @@ class NewArticle extends Component {
     const body = { body: newArticleBody, title: newArticleTitle, username };
     if (!newArticleBody || !newArticleTitle || !selectedTopic) {
       alert(
-        "Please insert both article title and body, and insure you have picked a topic for your new article, thank you"
+        "Please insure you have picked a topic for your new article, thank you"
       );
     } else {
       axios

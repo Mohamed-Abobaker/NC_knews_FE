@@ -21,12 +21,24 @@ class App extends Component {
         <Auth user={this.state.user} setUser={this.setUser}>
           <Nav />
           <Router>
-            <Home path="/" user={user} />
-            <Articles path="/articles" user={user} />
-            <SingleArticle path="/articles/:id" user={user} />
-            <Users path="/users" />
-            <NewArticle path="articles/new_article" user={user} />
-            <NotFound default />
+            <Home path="/" user={user} logoutFunc={this.logoutFunc} />
+            <Articles
+              path="/articles"
+              user={user}
+              logoutFunc={this.logoutFunc}
+            />
+            <SingleArticle
+              path="/articles/:id"
+              user={user}
+              logoutFunc={this.logoutFunc}
+            />
+            <Users path="/users" logoutFunc={this.logoutFunc} />
+            <NewArticle
+              path="articles/new_article"
+              user={user}
+              logoutFunc={this.logoutFunc}
+            />
+            <NotFound default logoutFunc={this.logoutFunc} />
           </Router>
         </Auth>
       </div>
@@ -35,6 +47,11 @@ class App extends Component {
   setUser = name => {
     this.setState({
       user: name
+    });
+  };
+  logoutFunc = () => {
+    this.setState({
+      user: ""
     });
   };
 }

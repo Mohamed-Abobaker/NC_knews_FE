@@ -13,6 +13,11 @@ class Home extends Component {
     const threeUserArtile = userArticles.slice(0, 3);
     return (
       <div>
+        <div>
+          <button type="button" onClick={() => this.props.logoutFunc()}>
+            Logout
+          </button>
+        </div>
         <h1>Welcome back to NC-News {`${user}`}!</h1>
         <div>
           <h4>{`${user}`}'s most recent articles</h4>

@@ -15,6 +15,11 @@ class Articles extends Component {
     const { user } = this.props;
     return (
       <div>
+        <div>
+          <button type="button" onClick={() => this.props.logoutFunc()}>
+            Logout
+          </button>
+        </div>
         <h1>Articles</h1>
         <p>Hey {user}, wanna add a new article?</p>
         <Link to="/articles/new_article">Add new article</Link>{" "}

@@ -10,25 +10,37 @@ class Comments extends Component {
   render() {
     const { comment, commentModifier } = this.state;
     const isUser =
-      this.props.user === (comment && comment.author) ? true : false;
+      this.props.user === ((comment && comment.author) || comment.username)
+        ? true
+        : false;
     return (
       <div>
         <p>
-          {comment.created_at.substring(0, 10)} ----- {comment.author} commented
-          :<br />'{comment.body}'
+          {comment.created_at.substring(0, 10)} -----{" "}
+          {comment.author || comment.username} commented :<br />'{comment.body}'
         </p>
         <p>Comment Votes : {comment.votes + commentModifier}</p>
         <button
           disabled={commentModifier === 1}
           type="button"
-          onClick={() => this.voteToComment(comment.comment_id, 1)}
+          onClick={() =>
+            this.voteToComment(
+              comment.comment_id,
+              commentModifier === -1 ? 2 : 1
+            )
+          }
         >
           Like
         </button>
         <button
           disabled={commentModifier === -1}
           type="button"
-          onClick={() => this.voteToComment(comment.comment_id, -1)}
+          onClick={() =>
+            this.voteToComment(
+              comment.comment_id,
+              commentModifier === 1 ? -2 : -1
+            )
+          }
         >
           Dislike
         </button>
@@ -39,6 +51,12 @@ class Comments extends Component {
         )}
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.setState({
+      comment: this.props.comment
+    });
   }
 
   voteToComment = (comm_id, num) => {
@@ -56,13 +74,13 @@ class Comments extends Component {
       });
   };
   deleteComment = e => {
-    console.log("here");
     const { id } = this.props;
     const comm_id = this.state.comment.comment_id;
     axios
       .delete(
         `https://nc-knews777.herokuapp.com/api/articles/${id}/comments/${comm_id}`
       )
+      // .then(() => this.props.handleCommentDelete(comm_id));
       .then(() => this.props.commentFunc());
   };
 }

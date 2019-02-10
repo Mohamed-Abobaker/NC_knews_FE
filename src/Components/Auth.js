@@ -27,6 +27,10 @@ class Auth extends Component {
             />
             <button type="submit">submit</button>
           </form>
+          <p>
+            (Hiring partners and visitors please use 'jessjelly' as a username
+            login)
+          </p>
         </div>
       );
     }
