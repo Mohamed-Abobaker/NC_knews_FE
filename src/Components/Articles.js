@@ -47,9 +47,8 @@ class Articles extends Component {
             Sort by:
             <select onChange={this.assignSortBy}>
               <option key={"disabled"} value={null} defaultValue disabled>
-                Choose criteria
+                Choose sort criteria
               </option>
-              <option value="Default">Default</option>
               <option value="created_at">Date created</option>
               <option value="comment_count">Comment count</option>
               <option value="votes">Votes</option>
@@ -118,15 +117,9 @@ class Articles extends Component {
 
   sortArticles = () => {
     const { chosenTopic, criteria } = this.state;
-    let url = `https://nc-knews777.herokuapp.com/api/articles?limit=1000000`;
+    let url = `https://nc-knews777.herokuapp.com/api/articles?limit=1000000&&sort_by=${criteria}`;
     if (chosenTopic !== "All" && criteria !== "Default") {
       url = `https://nc-knews777.herokuapp.com/api/topics/${chosenTopic}/articles?limit=1000000&&sort_by=${criteria}`;
-    }
-    if (chosenTopic === "All" && criteria !== "Default") {
-      url = `https://nc-knews777.herokuapp.com/api/articles?limit=1000000&&sort_by=${criteria}`;
-    }
-    if (chosenTopic !== "All" && criteria === "Default") {
-      url = `https://nc-knews777.herokuapp.com/api/topics/${chosenTopic}/articles?limit=1000000`;
     }
     axios.get(url).then(({ data }) => {
       this.setState({

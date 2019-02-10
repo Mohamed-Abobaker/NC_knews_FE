@@ -3,7 +3,7 @@ import axios from "axios";
 
 class Comments extends Component {
   state = {
-    comment: this.props.comment,
+    comment: {},
     commentModifier: 0
   };
 
@@ -16,7 +16,7 @@ class Comments extends Component {
     return (
       <div>
         <p>
-          {comment.created_at.substring(0, 10)} -----{" "}
+          {comment.created_at && comment.created_at.substring(0, 10)} -----{" "}
           {comment.author || comment.username} commented :<br />'{comment.body}'
         </p>
         <p>Comment Votes : {comment.votes + commentModifier}</p>
