@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
+import "../Home.css";
+import "../App.css";
 
 class Home extends Component {
   state = {
@@ -12,14 +14,11 @@ class Home extends Component {
     const { articles, userArticles } = this.state;
     const threeUserArtile = userArticles.slice(0, 3);
     return (
-      <div>
+      <div className="topGrid">
         <div>
-          <button type="button" onClick={() => this.props.logoutFunc()}>
-            Logout
-          </button>
+          <h1 className="page-title">Welcome back to NC-News {`${user}`}!</h1>
         </div>
-        <h1>Welcome back to NC-News {`${user}`}!</h1>
-        <div>
+        <div className="recentArticles">
           <h4>{`${user}`}'s most recent articles</h4>
           {threeUserArtile.map(article => {
             return (

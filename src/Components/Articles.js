@@ -1,28 +1,28 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "@reach/router";
+import "../Article.css";
 
 class Articles extends Component {
   state = {
     articles: [],
     topics: [],
     chosenTopic: "All",
-    criteria: "Default"
+    criteria: "created_at"
   };
 
   render() {
     const { articles, topics } = this.state;
     const { user } = this.props;
     return (
-      <div>
+      <div className="topGrid">
         <div>
-          <button type="button" onClick={() => this.props.logoutFunc()}>
-            Logout
-          </button>
+          <h1>NC-News Articles</h1>
         </div>
-        <h1>Articles</h1>
-        <p>Hey {user}, wanna add a new article?</p>
-        <Link to="/articles/new_article">Add new article</Link>{" "}
+        <div>
+          <p>Hey {user}, wanna add a new article?</p>
+          <Link to="/articles/new_article">Add new article</Link>{" "}
+        </div>
         <div>
           <label>
             Filter Articles by Topic:
@@ -55,19 +55,21 @@ class Articles extends Component {
             </select>
           </label>
         </div>
-        <h4>Number of Articles : {articles.length}</h4>
-        {articles.map(article => {
-          return (
-            <React.Fragment key={article.article_id}>
-              <p>
-                Title : {article.title}
-                <br /> Author : {article.author}
-                <br /> Topic : {article.topic}
-              </p>
-              <Link to={`/articles/${article.article_id}`}>View Article</Link>
-            </React.Fragment>
-          );
-        })}
+        <div>
+          <h4>Number of Articles : {articles.length}</h4>
+          {articles.map(article => {
+            return (
+              <React.Fragment key={article.article_id}>
+                <p>
+                  Title : {article.title}
+                  <br /> Author : {article.author}
+                  <br /> Topic : {article.topic}
+                </p>
+                <Link to={`/articles/${article.article_id}`}>View Article</Link>
+              </React.Fragment>
+            );
+          })}
+        </div>
       </div>
     );
   }

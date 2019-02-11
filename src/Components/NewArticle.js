@@ -22,16 +22,11 @@ class NewArticle extends Component {
     } = this.state;
     return (
       <div key={"newArticlePage"}>
-        <div>
-          <button type="button" onClick={() => this.props.logoutFunc()}>
-            Logout
-          </button>
-        </div>
         <h1>Write a new Article</h1>
         <div key={"addNewArticle"}>
           <p>First choose the topic of your new article</p>
           <select onChange={this.topicChange}>
-            <option selected disabled key={"disabled"} value={null}>
+            <option defaultValue disabled key={"disabled"} value={null}>
               Choose topic
             </option>
             {topics &&

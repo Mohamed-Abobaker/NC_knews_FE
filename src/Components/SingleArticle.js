@@ -3,6 +3,7 @@ import axios from "axios";
 import Comments from "./Comments";
 import { navigate } from "@reach/router";
 import ArticleNotFound from "./ArticleNotFound";
+import "../SingleArticle.css";
 
 class SingleArticle extends Component {
   state = {
@@ -27,12 +28,7 @@ class SingleArticle extends Component {
     if (hasError) return <ArticleNotFound />;
 
     return (
-      <div>
-        <div>
-          <button type="button" onClick={() => this.props.logoutFunc()}>
-            Logout
-          </button>
-        </div>
+      <div className="topGrid">
         <div>
           <h1>{article && article.title}</h1>
           <p>{article && article.body}</p>
@@ -46,14 +42,14 @@ class SingleArticle extends Component {
           <button
             disabled={votesModifier === 1}
             type="button"
-            onClick={() => this.voteToArticle(1)}
+            onClick={() => this.voteToArticle(votesModifier === -1 ? 2 : 1)}
           >
             Like
           </button>
           <button
             disabled={votesModifier === -1}
             type="button"
-            onClick={() => this.voteToArticle(-1)}
+            onClick={() => this.voteToArticle(votesModifier === 1 ? -2 : -1)}
           >
             Dislike
           </button>

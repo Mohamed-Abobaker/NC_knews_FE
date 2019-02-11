@@ -80,8 +80,8 @@ class Comments extends Component {
       .delete(
         `https://nc-knews777.herokuapp.com/api/articles/${id}/comments/${comm_id}`
       )
-      // .then(() => this.props.handleCommentDelete(comm_id));
-      .then(() => this.props.commentFunc());
+      .then(() => this.props.handleCommentDelete(comm_id));
+    // .then(() => this.props.commentFunc());
   };
 }
 

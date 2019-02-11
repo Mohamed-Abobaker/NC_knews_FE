@@ -1,0 +1,8 @@
+.topGrid {
+  display: grid;
+}
+
+.recentArticles {
+  border-radius: 5px;
+  border-style: double;
+}

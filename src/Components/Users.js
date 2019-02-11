@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "../Users.css";
 
 class Users extends Component {
   state = {
@@ -8,30 +9,27 @@ class Users extends Component {
   render() {
     const { users } = this.state;
     return (
-      <div>
-        <div>
-          <button type="button" onClick={() => this.props.logoutFunc()}>
-            Logout
-          </button>
-        </div>
+      <div className="topGrid">
         <h1>Users</h1>{" "}
-        {users.map(user => {
-          return (
-            <div key={user.username}>
-              <img
-                src={user.avatar_url}
-                alt="Avatar pic"
-                height="100"
-                width="100"
-              />
-              <p>
-                Name : {user.name}
-                <br />
-                Username: {user.username}{" "}
-              </p>
-            </div>
-          );
-        })}
+        <div className="usersGrid">
+          {users.map(user => {
+            return (
+              <div key={user.username}>
+                <img
+                  src={user.avatar_url}
+                  alt="Avatar pic"
+                  height="100"
+                  width="100"
+                />
+                <p>
+                  Name : {user.name}
+                  <br />
+                  Username: {user.username}{" "}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
