@@ -10,11 +10,11 @@ class Users extends Component {
     const { users } = this.state;
     return (
       <div className="topGrid">
-        <h1>Users</h1>{" "}
+        <h1 className="page-title">Users</h1>{" "}
         <div className="usersGrid">
           {users.map(user => {
             return (
-              <div key={user.username}>
+              <div className="container" key={user.username}>
                 <img
                   src={user.avatar_url}
                   alt="Avatar pic"

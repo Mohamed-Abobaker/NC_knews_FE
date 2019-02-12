@@ -1,7 +1,3 @@
-.topGrid {
-  display: grid;
-}
-
 .usersGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;

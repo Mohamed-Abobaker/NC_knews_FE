@@ -18,42 +18,46 @@ class Home extends Component {
         <div>
           <h1 className="page-title">Welcome back to NC-News</h1>
         </div>
-        <div className="recentArticles">
+        <div className="container">
           <h3>{`${user}`}'s most recent articles</h3>
           {threeUserArtile.map(article => {
             return (
-              <React.Fragment key={article.article_id}>
+              <div className="tcontainer" key={article.article_id}>
                 <p>
-                  Title : {article.title}
-                  <br /> Topic : {article.topic}
+                  <Link to={`/articles/${article.article_id}`}>
+                    {article.title}
+                  </Link>{" "}
+                  <br />
+                  {article && article.created_at.substring(0, 10)}
+                  <br />
+                  Topic : {article.topic}
                 </p>
-                <Link to={`/articles/${article.article_id}`}>
-                  View your article
-                </Link>
-              </React.Fragment>
+              </div>
             );
           })}
         </div>
-        <div className="recentArticles">
+        <div className="container">
           <h4>
             Hey {`${user}`} people seem to love your articles.
             <br />
-            Want to add another one? Just click the link below
+            <Link to="/articles/new_article">Want to add another one?</Link>
           </h4>
-          <Link to="/articles/new_article">Write a new article</Link>
         </div>
-        <div className="recentArticles">
+        <div className="container">
           <h3>Most Popular Artilces</h3>
           {articles.map(article => {
             return (
-              <React.Fragment key={article.article_id}>
+              <div className="tcontainer" key={article.article_id}>
                 <p>
-                  Title : {article.title}
-                  <br /> Author : {article.author}
+                  <Link to={`/articles/${article.article_id}`}>
+                    {article.title}
+                  </Link>
+                  <br /> Posted by {article.author}
+                  <br />
+                  {article && article.created_at.substring(0, 10)}
                   <br /> Topic : {article.topic}
                 </p>
-                <Link to={`/articles/${article.article_id}`}>View Article</Link>
-              </React.Fragment>
+              </div>
             );
           })}
         </div>

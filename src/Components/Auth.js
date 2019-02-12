@@ -17,22 +17,24 @@ class Auth extends Component {
       return (
         <div className="page-title">
           <h3>NC-News Login</h3>
-          <h5>Please submit your username to login</h5>
-          {hasError && <p>Sorry this username does not exist</p>}
-          <form onSubmit={this.handleSubmit}>
-            <input
-              required
-              onChange={this.handleChange}
-              placeholder={"username"}
-              type="text"
-              value={input}
-            />
-            <button type="submit">submit</button>
-          </form>
-          <p>
-            (Hiring partners and visitors please use 'jessjelly' as a username
-            login)
-          </p>
+          <div className="container">
+            <h5>Please submit your username to login</h5>
+            {hasError && <p>Sorry this username does not exist</p>}
+            <form onSubmit={this.handleSubmit}>
+              <input
+                required
+                onChange={this.handleChange}
+                placeholder={"username"}
+                type="text"
+                value={input}
+              />
+              <button type="submit">submit</button>
+            </form>
+            <p>
+              (Hiring partners and visitors please use 'jessjelly' as a username
+              login)
+            </p>
+          </div>
         </div>
       );
     }

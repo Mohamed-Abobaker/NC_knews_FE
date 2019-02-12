@@ -9,20 +9,23 @@ class SingleTopic extends Component {
   render() {
     const { articles } = this.state;
     return (
-      <div>
-        <h1>{this.props.slug}</h1>
-        <div>
+      <div className="topGrid">
+        <h1 className="page-title">{this.props.slug}</h1>
+        <div className="container">
           <h4>Number of Articles : {articles.length}</h4>
           {articles.map(article => {
             return (
-              <React.Fragment key={article.article_id}>
+              <div className="tcontainer" key={article.article_id}>
                 <p>
-                  Title : {article.title}
-                  <br /> Author : {article.author}
+                  <Link to={`/articles/${article.article_id}`}>
+                    {article.title}
+                  </Link>
+                  <br /> Posted by {article.author}
+                  <br />
+                  {article && article.created_at.substring(0, 10)}
                   <br /> Topic : {article.topic}
                 </p>
-                <Link to={`/articles/${article.article_id}`}>View Article</Link>
-              </React.Fragment>
+              </div>
             );
           })}
         </div>

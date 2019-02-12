@@ -8,19 +8,23 @@ class Nav extends Component {
     // console.log(this.props);
     return (
       <div className="topNav">
-        <h1 className="page-title">Northcoder News</h1>
+        <h1>Northcoder News</h1>
         <div className="navBar">
           <nav>
             <Link to="/">Home</Link>
-            {" | "}
+            {"        "}
             <Link to="/articles">Articles</Link>
-            {" | "}
+            {"        "}
             <Link to="/topics">Topics</Link>
-            {" | "}
+            {"        "}
             <Link to="/users">Users</Link>
           </nav>
           <div>
-            <button type="button" onClick={() => this.props.logoutFunc()}>
+            <button
+              className="navButtons"
+              type="button"
+              onClick={() => this.props.logoutFunc()}
+            >
               Logout
             </button>
           </div>

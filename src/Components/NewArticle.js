@@ -21,9 +21,9 @@ class NewArticle extends Component {
       newArticleTitle
     } = this.state;
     return (
-      <div key={"newArticlePage"}>
-        <h1>Write a new Article</h1>
-        <div key={"addNewArticle"}>
+      <div key={"newArticlePage"} className="topGrid">
+        <h1 className="page-title">Write a new Article</h1>
+        <div key={"addNewArticle"} className="container">
           <p>First choose the topic of your new article</p>
           <select onChange={this.topicChange}>
             <option defaultValue disabled key={"disabled"} value={null}>
@@ -62,30 +62,32 @@ class NewArticle extends Component {
             {/* {'finish this form for the article!'} */}
           </form>
         </div>
-        <p>
-          {" "}
-          If you wish to add a new topic please enter title and description then
-          submit
-        </p>
-        <form onSubmit={this.addTopic}>
-          <input
-            placeholder="New Topic Title"
-            type="text"
-            required
-            onChange={this.handleChange}
-            value={newSlugInput}
-            id={"newSlugInput"}
-          />
-          <input
-            required
-            placeholder="New Topic Description"
-            type="text"
-            onChange={this.handleChange}
-            value={newDescriptionInput}
-            id={"newDescriptionInput"}
-          />
-          <button type="submit">Submit new topic</button>
-        </form>
+        <div className="container">
+          <p>
+            {" "}
+            If you wish to add a new topic please enter title and description
+            then submit
+          </p>
+          <form onSubmit={this.addTopic}>
+            <input
+              placeholder="New Topic Title"
+              type="text"
+              required
+              onChange={this.handleChange}
+              value={newSlugInput}
+              id={"newSlugInput"}
+            />
+            <input
+              required
+              placeholder="New Topic Description"
+              type="text"
+              onChange={this.handleChange}
+              value={newDescriptionInput}
+              id={"newDescriptionInput"}
+            />
+            <button type="submit">Submit new topic</button>
+          </form>
+        </div>
       </div>
     );
   }

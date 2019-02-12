@@ -4,6 +4,7 @@ import Comments from "./Comments";
 import { navigate } from "@reach/router";
 import ArticleNotFound from "./ArticleNotFound";
 import "../Style/SingleArticle.css";
+import "../App.css";
 
 class SingleArticle extends Component {
   state = {
@@ -29,15 +30,15 @@ class SingleArticle extends Component {
 
     return (
       <div className="topGrid">
-        <div>
-          <h1>{article && article.title}</h1>
+        <h1 className="page-title">{article && article.title}</h1>
+        <div className="container">
           <p>{article && article.body}</p>
           <p>
-            {article && article.author} ------ posted on{" "}
+            '{article && article.author}' posted on{" "}
             {article && article.created_at.substring(0, 10)}
           </p>
         </div>
-        <div>
+        <div className="container">
           <p>Article Votes: {article && article.votes + votesModifier}</p>
           <button
             disabled={votesModifier === 1}
@@ -59,7 +60,7 @@ class SingleArticle extends Component {
             </button>
           )}
         </div>
-        <div>
+        <div className="container">
           <h3>Comments</h3>
           <form onSubmit={this.postNewComment}>
             <input
@@ -68,7 +69,7 @@ class SingleArticle extends Component {
               type="text"
               value={newComment}
             />
-            <button type="sumbit">submit comment</button>
+            <button type="sumbit">submit new comment</button>
           </form>
           {comments &&
             comments.map(comment => {

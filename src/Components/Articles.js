@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "@reach/router";
 import "../Style/Article.css";
+import "../App.css";
 
 class Articles extends Component {
   state = {
@@ -16,57 +17,63 @@ class Articles extends Component {
     const { user } = this.props;
     return (
       <div className="topGrid">
-        <div>
-          <h1>NC-News Articles</h1>
+        <h1 className="page-title">NC-News Articles</h1>
+        <div className="container">
+          <h3>
+            <Link to="/articles/new_article">
+              Hey {user}, wanna add a new article?
+            </Link>{" "}
+          </h3>
         </div>
-        <div>
-          <p>Hey {user}, wanna add a new article?</p>
-          <Link to="/articles/new_article">Add new article</Link>{" "}
+        <div className="container">
+          <div>
+            <label>
+              Filter Articles by Topic:
+              <select onChange={this.assignTopic}>
+                <option key={"disabled"} value={null} defaultValue disabled>
+                  Choose topic
+                </option>
+                <option value="All">All Topics</option>
+                {topics &&
+                  topics.map(topic => {
+                    return (
+                      <option key={topic.slug} value={topic.slug}>
+                        {topic.slug}
+                      </option>
+                    );
+                  })}
+              </select>
+            </label>
+          </div>
+          <div>
+            <label>
+              Sort by:
+              <select onChange={this.assignSortBy}>
+                <option key={"disabled"} value={null} defaultValue disabled>
+                  Choose sort criteria
+                </option>
+                <option value="created_at">Date created</option>
+                <option value="comment_count">Comment count</option>
+                <option value="votes">Votes</option>
+              </select>
+            </label>
+          </div>
         </div>
-        <div>
-          <label>
-            Filter Articles by Topic:
-            <select onChange={this.assignTopic}>
-              <option key={"disabled"} value={null} defaultValue disabled>
-                Choose topic
-              </option>
-              <option value="All">All Topics</option>
-              {topics &&
-                topics.map(topic => {
-                  return (
-                    <option key={topic.slug} value={topic.slug}>
-                      {topic.slug}
-                    </option>
-                  );
-                })}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Sort by:
-            <select onChange={this.assignSortBy}>
-              <option key={"disabled"} value={null} defaultValue disabled>
-                Choose sort criteria
-              </option>
-              <option value="created_at">Date created</option>
-              <option value="comment_count">Comment count</option>
-              <option value="votes">Votes</option>
-            </select>
-          </label>
-        </div>
-        <div>
+        <div className="container">
           <h4>Number of Articles : {articles.length}</h4>
           {articles.map(article => {
             return (
-              <React.Fragment key={article.article_id}>
+              <div className="tcontainer" key={article.article_id}>
                 <p>
-                  Title : {article.title}
-                  <br /> Author : {article.author}
+                  <Link to={`/articles/${article.article_id}`}>
+                    {article.title}
+                  </Link>
+                  <br /> Posted by {article.author}
+                  <br />
+                  {article && article.created_at.substring(0, 10)}
                   <br /> Topic : {article.topic}
                 </p>
-                <Link to={`/articles/${article.article_id}`}>View Article</Link>
-              </React.Fragment>
+              </div>
             );
           })}
         </div>

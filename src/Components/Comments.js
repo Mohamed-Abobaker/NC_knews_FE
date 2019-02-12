@@ -14,10 +14,11 @@ class Comments extends Component {
         ? true
         : false;
     return (
-      <div>
+      <div className="tcontainer">
         <p>
-          {comment.created_at && comment.created_at.substring(0, 10)} -----{" "}
-          {comment.author || comment.username} commented :<br />'{comment.body}'
+          {comment.author || comment.username} on{" "}
+          {comment.created_at && comment.created_at.substring(0, 10)}
+          <br /> <br />'{comment.body}'
         </p>
         <p>Comment Votes : {comment.votes + commentModifier}</p>
         <button

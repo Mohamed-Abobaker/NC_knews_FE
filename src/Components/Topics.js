@@ -10,13 +10,15 @@ class Topics extends Component {
     const { topics } = this.state;
     console.log(topics);
     return (
-      <div>
-        <h1>Topics</h1>
+      <div className="topGrid">
+        <h1 className="page-title">Topics</h1>
         {topics.map(topic => {
           return (
-            <div>
-              <Link to={`${topic.slug}/articles`}>Topic: {topic.slug}</Link>
-              <p>Description: {topic.description}</p>
+            <div className="container">
+              <p>
+                <Link to={`${topic.slug}/articles`}>{topic.slug}</Link> <br />
+                {topic.description}
+              </p>
             </div>
           );
         })}
