@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
-import "../Home.css";
+import "../Style/Home.css";
 import "../App.css";
 
 class Home extends Component {
@@ -16,7 +16,7 @@ class Home extends Component {
     return (
       <div className="topGrid">
         <div>
-          <h1 className="page-title">Welcome back to NC-News {`${user}`}!</h1>
+          <h1 className="page-title">Welcome back to NC-News</h1>
         </div>
         <div className="recentArticles">
           <h4>{`${user}`}'s most recent articles</h4>

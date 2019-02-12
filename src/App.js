@@ -9,6 +9,8 @@ import Users from "./Components/Users";
 import NewArticle from "./Components/NewArticle";
 import Auth from "./Components/Auth";
 import NotFound from "./Components/NotFound";
+import Topics from "./Components/Topics";
+import SingleTopic from "./Components/SingleTopic";
 
 class App extends Component {
   state = {
@@ -27,9 +29,12 @@ class App extends Component {
               <Home path="/" user={user} />
               <Articles path="/articles" user={user} />
               <SingleArticle path="/articles/:id" user={user} />
+              <Topics path="topics" />
+              <SingleTopic path="topics/:slug/articles" />
               <Users path="/users" />
               <NewArticle path="articles/new_article" user={user} />
               <NotFound default />
+              {/* <LoginForm path="/test" /> */}
             </Router>
           </div>
         </Auth>

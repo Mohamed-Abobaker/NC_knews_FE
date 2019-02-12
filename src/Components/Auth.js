@@ -20,6 +20,7 @@ class Auth extends Component {
           {hasError && <p>Sorry this username does not exist</p>}
           <form onSubmit={this.handleSubmit}>
             <input
+              required
               onChange={this.handleChange}
               placeholder={"username"}
               type="text"

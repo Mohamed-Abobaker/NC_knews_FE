@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "@reach/router";
-import "../Article.css";
+import "../Style/Article.css";
 
 class Articles extends Component {
   state = {

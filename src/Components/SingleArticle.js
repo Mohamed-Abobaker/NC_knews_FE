@@ -3,7 +3,7 @@ import axios from "axios";
 import Comments from "./Comments";
 import { navigate } from "@reach/router";
 import ArticleNotFound from "./ArticleNotFound";
-import "../SingleArticle.css";
+import "../Style/SingleArticle.css";
 
 class SingleArticle extends Component {
   state = {
@@ -63,6 +63,7 @@ class SingleArticle extends Component {
           <h3>Comments</h3>
           <form onSubmit={this.postNewComment}>
             <input
+              required
               onChange={this.handleChange}
               type="text"
               value={newComment}
