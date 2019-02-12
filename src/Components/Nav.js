@@ -5,7 +5,7 @@ import "../App.css";
 const Nav = () => {
   return (
     <div className="topNav">
-      <h1>Northcoder News</h1>
+      <h1 className="page-title">Northcoder News</h1>
       <div className="navBar">
         <nav>
           <Link to="/">Home</Link>

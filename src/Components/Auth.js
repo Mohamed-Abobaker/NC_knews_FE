@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "../App.css";
 
 class Auth extends Component {
   state = {
@@ -14,8 +15,8 @@ class Auth extends Component {
     } else {
       const { input } = this.state;
       return (
-        <div>
-          <h3>Welcome to NC-News!</h3>
+        <div className="page-title">
+          <h3>NC-News Login</h3>
           <h5>Please submit your username to login</h5>
           {hasError && <p>Sorry this username does not exist</p>}
           <form onSubmit={this.handleSubmit}>

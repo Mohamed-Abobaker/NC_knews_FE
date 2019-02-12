@@ -19,7 +19,7 @@ class Home extends Component {
           <h1 className="page-title">Welcome back to NC-News</h1>
         </div>
         <div className="recentArticles">
-          <h4>{`${user}`}'s most recent articles</h4>
+          <h3>{`${user}`}'s most recent articles</h3>
           {threeUserArtile.map(article => {
             return (
               <React.Fragment key={article.article_id}>
@@ -34,7 +34,7 @@ class Home extends Component {
             );
           })}
         </div>
-        <div>
+        <div className="recentArticles">
           <h4>
             Hey {`${user}`} people seem to love your articles.
             <br />
@@ -42,7 +42,7 @@ class Home extends Component {
           </h4>
           <Link to="/articles/new_article">Write a new article</Link>
         </div>
-        <div>
+        <div className="recentArticles">
           <h3>Most Popular Artilces</h3>
           {articles.map(article => {
             return (

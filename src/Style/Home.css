@@ -5,4 +5,6 @@
 .recentArticles {
   border-radius: 5px;
   border-style: double;
+  background-color: whitesmoke;
+  margin: 5px;
 }
