@@ -11,13 +11,21 @@ class Nav extends Component {
         <h1>Northcoder News</h1>
         <div className="navBar">
           <nav>
-            <Link to="/">Home</Link>
+            <Link className="navLink" to="/">
+              Home
+            </Link>
             {"        "}
-            <Link to="/articles">Articles</Link>
+            <Link className="navLink" to="/articles">
+              Articles
+            </Link>
             {"        "}
-            <Link to="/topics">Topics</Link>
+            <Link className="navLink" to="/topics">
+              Topics
+            </Link>
             {"        "}
-            <Link to="/users">Users</Link>
+            <Link className="navLink" to="/users">
+              Users
+            </Link>
           </nav>
           <div>
             <button

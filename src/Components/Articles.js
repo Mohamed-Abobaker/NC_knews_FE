@@ -18,17 +18,17 @@ class Articles extends Component {
     return (
       <div className="topGrid">
         <h1 className="page-title">NC-News Articles</h1>
-        <div className="container">
+        <div className="container2">
           <h3>
-            <Link to="/articles/new_article">
+            <Link className="addArticle" to="/articles/new_article">
               Hey {user}, wanna add a new article?
             </Link>{" "}
           </h3>
         </div>
-        <div className="container">
+        <div className="container2">
           <div>
             <label>
-              Filter Articles by Topic:
+              Filter Topic:&nbsp;
               <select onChange={this.assignTopic}>
                 <option key={"disabled"} value={null} defaultValue disabled>
                   Choose topic
@@ -47,7 +47,7 @@ class Articles extends Component {
           </div>
           <div>
             <label>
-              Sort by:
+              &nbsp;&nbsp;&nbsp;Sort by:&nbsp;
               <select onChange={this.assignSortBy}>
                 <option key={"disabled"} value={null} defaultValue disabled>
                   Choose sort criteria
@@ -64,14 +64,19 @@ class Articles extends Component {
           {articles.map(article => {
             return (
               <div className="tcontainer" key={article.article_id}>
+                <Link
+                  className="articleTitle"
+                  to={`/articles/${article.article_id}`}
+                >
+                  {article.title}
+                </Link>
                 <p>
-                  <Link to={`/articles/${article.article_id}`}>
-                    {article.title}
-                  </Link>
-                  <br /> Posted by {article.author}
+                  <i>Posted by</i> {article.author}
                   <br />
                   {article && article.created_at.substring(0, 10)}
-                  <br /> Topic : {article.topic}
+                  <br /> <i>Topic: &nbsp;</i> {article.topic}
+                  <br />
+                  <i>Votes: &nbsp;</i> {article.votes}
                 </p>
               </div>
             );

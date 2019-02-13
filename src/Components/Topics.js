@@ -8,20 +8,21 @@ class Topics extends Component {
   };
   render() {
     const { topics } = this.state;
-    console.log(topics);
     return (
       <div className="topGrid">
-        <h1 className="page-title">Topics</h1>
-        {topics.map(topic => {
-          return (
-            <div className="container">
-              <p>
-                <Link to={`${topic.slug}/articles`}>{topic.slug}</Link> <br />
-                {topic.description}
-              </p>
-            </div>
-          );
-        })}
+        <h1 className="page-title">NC-News Topics</h1>
+        <div className="topicGrid">
+          {topics.map(topic => {
+            return (
+              <div className="container" key={topic.slug}>
+                <Link className="addArticle" to={`${topic.slug}/articles`}>
+                  {topic.slug}
+                </Link>
+                <p>{topic.description}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
