@@ -16,14 +16,19 @@ class SingleTopic extends Component {
           {articles.map(article => {
             return (
               <div className="tcontainer" key={article.article_id}>
+                <Link
+                  className="articleTitle"
+                  to={`/articles/${article.article_id}`}
+                >
+                  {article.title}
+                </Link>
                 <p>
-                  <Link to={`/articles/${article.article_id}`}>
-                    {article.title}
-                  </Link>
-                  <br /> Posted by {article.author}
+                  <i>Posted by</i> {article.author}
                   <br />
                   {article && article.created_at.substring(0, 10)}
-                  <br /> Topic : {article.topic}
+                  <br /> <i>Topic: &nbsp;</i> {article.topic}
+                  <br />
+                  <i>Votes: &nbsp;</i> {article.votes}
                 </p>
               </div>
             );

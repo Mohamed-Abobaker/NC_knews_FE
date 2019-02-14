@@ -14,16 +14,16 @@ class Articles extends Component {
 
   render() {
     const { articles, topics } = this.state;
-    const { user } = this.props;
+    // const { user } = this.props;
     return (
       <div className="topGrid">
         <h1 className="page-title">NC-News Articles</h1>
         <div className="container2">
-          <h3>
+          <p>
             <Link className="addArticle" to="/articles/new_article">
-              Hey {user}, wanna add a new article?
+              Create Article {/* Hey {user}, wanna add a new article? */}
             </Link>{" "}
-          </h3>
+          </p>
         </div>
         <div className="container2">
           <div>
@@ -60,7 +60,9 @@ class Articles extends Component {
           </div>
         </div>
         <div className="container">
-          <h4>Number of Articles : {articles.length}</h4>
+          <div className="containerTitle">
+            <h4>Number of Articles : {articles.length}</h4>
+          </div>
           {articles.map(article => {
             return (
               <div className="tcontainer" key={article.article_id}>

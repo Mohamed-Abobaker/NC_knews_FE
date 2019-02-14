@@ -19,7 +19,9 @@ class Home extends Component {
           <h1 className="page-title">Welcome back to NC-News</h1>
         </div>
         <div className="container">
-          <h3>{`${user}`}'s most recent articles</h3>
+          <div className="containerTitle">
+            <h3>{`${user}`}'s most recent articles</h3>
+          </div>
           {threeUserArtile.map(article => {
             return (
               <div className="tcontainer" key={article.article_id}>
@@ -51,7 +53,9 @@ class Home extends Component {
           </h4>
         </div>
         <div className="container">
-          <h3>Most Popular Artilces</h3>
+          <div className="containerTitle">
+            <h3>Most Popular Artilces</h3>
+          </div>
           {articles.map(article => {
             return (
               <div className="tcontainer" key={article.article_id}>
@@ -98,7 +102,7 @@ class Home extends Component {
   fetchArticles = () => {
     axios
       .get(
-        "https://nc-knews777.herokuapp.com/api/articles?limit=5&&sort_by=votes"
+        "https://nc-knews777.herokuapp.com/api/articles?limit=6&&sort_by=votes"
       )
       .then(({ data }) => {
         this.setState({

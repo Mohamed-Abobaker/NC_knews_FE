@@ -31,14 +31,14 @@ class SingleArticle extends Component {
     return (
       <div className="topGrid">
         <h1 className="page-title">{article && article.title}</h1>
-        <div className="container">
+        <div className="articleContainer">
           <p>{article && article.body}</p>
           <p>
             '{article && article.author}' posted on{" "}
             {article && article.created_at.substring(0, 10)}
           </p>
         </div>
-        <div className="container">
+        <div className="articleContainer">
           <p>Article Votes: {article && article.votes + votesModifier}</p>
           <button
             disabled={votesModifier === 1}
@@ -61,16 +61,18 @@ class SingleArticle extends Component {
           )}
         </div>
         <div className="container">
-          <h3>Comments</h3>
-          <form onSubmit={this.postNewComment}>
-            <input
-              required
-              onChange={this.handleChange}
-              type="text"
-              value={newComment}
-            />
-            <button type="sumbit">submit new comment</button>
-          </form>
+          <div className="containerTitle">
+            <h3>Comments</h3>
+            <form onSubmit={this.postNewComment}>
+              <input
+                required
+                onChange={this.handleChange}
+                type="text"
+                value={newComment}
+              />
+              <button type="sumbit">submit new comment</button>
+            </form>
+          </div>
           {comments &&
             comments.map(comment => {
               return (

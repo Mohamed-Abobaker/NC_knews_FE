@@ -14,7 +14,7 @@ class Topics extends Component {
         <div className="topicGrid">
           {topics.map(topic => {
             return (
-              <div className="container" key={topic.slug}>
+              <div className="topic-container" key={topic.slug}>
                 <Link className="addArticle" to={`${topic.slug}/articles`}>
                   {topic.slug}
                 </Link>

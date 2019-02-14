@@ -8,7 +8,9 @@ class Nav extends Component {
     // console.log(this.props);
     return (
       <div className="topNav">
-        <h1>Northcoder News</h1>
+        <h1 className="mainTitle">
+          <span className="redLetter">N</span>orthcoder News
+        </h1>
         <div className="navBar">
           <nav>
             <Link className="navLink" to="/">
@@ -27,15 +29,13 @@ class Nav extends Component {
               Users
             </Link>
           </nav>
-          <div>
-            <button
-              className="navButtons"
-              type="button"
-              onClick={() => this.props.logoutFunc()}
-            >
-              Logout
-            </button>
-          </div>
+          <button
+            className="navButtons"
+            type="button"
+            onClick={() => this.props.logoutFunc()}
+          >
+            Logout
+          </button>
         </div>
       </div>
     );

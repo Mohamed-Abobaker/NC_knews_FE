@@ -15,10 +15,12 @@ class Auth extends Component {
     } else {
       const { input } = this.state;
       return (
-        <div className="page-title">
-          <h3>NC-News Login</h3>
-          <div className="container">
-            <h5>Please submit your username to login</h5>
+        <div>
+          <div className="auth">
+            <h2 className="page-title">NC-News Login</h2>
+            <p>
+              <b>Please submit your username to login</b>
+            </p>
             {hasError && <p>Sorry this username does not exist</p>}
             <form onSubmit={this.handleSubmit}>
               <input
