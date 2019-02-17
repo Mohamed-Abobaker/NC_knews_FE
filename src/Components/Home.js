@@ -20,7 +20,7 @@ class Home extends Component {
         </div>
         <div className="container">
           <div className="containerTitle">
-            <h3>{`${user}`}'s most recent articles</h3>
+            <h3 className="subHeadings">{`${user}`}'s most recent articles</h3>
           </div>
           {threeUserArtile.map(article => {
             return (
@@ -54,7 +54,7 @@ class Home extends Component {
         </div>
         <div className="container">
           <div className="containerTitle">
-            <h3>Most Popular Artilces</h3>
+            <h3 className="subHeadings">Most Popular Artilces</h3>
           </div>
           {articles.map(article => {
             return (

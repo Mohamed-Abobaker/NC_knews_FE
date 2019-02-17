@@ -18,13 +18,11 @@ class Articles extends Component {
     return (
       <div className="topGrid">
         <h1 className="page-title">NC-News Articles</h1>
-        <div className="container2">
-          <p>
-            <Link className="addArticle" to="/articles/new_article">
-              Create Article {/* Hey {user}, wanna add a new article? */}
-            </Link>{" "}
-          </p>
-        </div>
+        {/* <div className="container2"> */}
+        <Link className="addArticle" to="/articles/new_article">
+          Create Article {/* Hey {user}, wanna add a new article? */}
+        </Link>{" "}
+        {/* </div> */}
         <div className="container2">
           <div>
             <label>
@@ -61,7 +59,9 @@ class Articles extends Component {
         </div>
         <div className="container">
           <div className="containerTitle">
-            <h4>Number of Articles : {articles.length}</h4>
+            <h4 className="subHeadings">
+              Number of Articles : {articles.length}
+            </h4>
           </div>
           {articles.map(article => {
             return (
