@@ -12,7 +12,11 @@ class SingleTopic extends Component {
       <div className="topGrid">
         <h1 className="page-title">{this.props.slug}</h1>
         <div className="container">
-          <h4>Number of Articles : {articles.length}</h4>
+          <div className="containerTitle">
+            <h4 className="subHeadings">
+              Number of Articles : {articles.length}
+            </h4>
+          </div>
           {articles.map(article => {
             return (
               <div className="tcontainer" key={article.article_id}>

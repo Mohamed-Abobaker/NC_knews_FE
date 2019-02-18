@@ -15,7 +15,7 @@ class Topics extends Component {
           {topics.map(topic => {
             return (
               <div className="topic-container" key={topic.slug}>
-                <Link className="addArticle" to={`${topic.slug}/articles`}>
+                <Link className="topicTitle" to={`${topic.slug}/articles`}>
                   {topic.slug}
                 </Link>
                 <p>{topic.description}</p>
