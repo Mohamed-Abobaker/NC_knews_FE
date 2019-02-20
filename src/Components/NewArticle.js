@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { navigate } from "@reach/router";
+import { BarLoader } from "react-css-loaders";
 
 class NewArticle extends Component {
   state = {
@@ -9,7 +10,8 @@ class NewArticle extends Component {
     newSlugInput: "",
     newDescriptionInput: "",
     newArticleTitle: "",
-    newArticleBody: ""
+    newArticleBody: "",
+    loading: true
   };
 
   render() {
@@ -18,9 +20,12 @@ class NewArticle extends Component {
       newSlugInput,
       newDescriptionInput,
       newArticleBody,
-      newArticleTitle
+      newArticleTitle,
+      loading
     } = this.state;
-    return (
+    return loading ? (
+      <BarLoader />
+    ) : (
       <div key={"newArticlePage"} className="topGrid">
         <h1 className="page-title">Write a new Article</h1>
         <div key={"addNewArticle"} className="container">
@@ -159,7 +164,8 @@ class NewArticle extends Component {
       .get("https://nc-knews777.herokuapp.com/api/topics")
       .then(({ data }) => {
         this.setState({
-          topics: data.topics
+          topics: data.topics,
+          loading: false
         });
       });
   };

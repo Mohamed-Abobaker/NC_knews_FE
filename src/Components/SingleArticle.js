@@ -5,6 +5,7 @@ import { navigate } from "@reach/router";
 import ArticleNotFound from "./ArticleNotFound";
 import "../Style/SingleArticle.css";
 import "../App.css";
+import { BarLoader } from "react-css-loaders";
 
 class SingleArticle extends Component {
   state = {
@@ -12,7 +13,9 @@ class SingleArticle extends Component {
     votesModifier: 0,
     comments: [],
     newComment: "",
-    hasError: false
+    hasError: false,
+    loading: true,
+    loadingComment: true
   };
   render() {
     const {
@@ -20,7 +23,9 @@ class SingleArticle extends Component {
       votesModifier,
       comments,
       newComment,
-      hasError
+      hasError,
+      loading,
+      loadingComment
     } = this.state;
 
     const isUser =
@@ -28,7 +33,9 @@ class SingleArticle extends Component {
 
     if (hasError) return <ArticleNotFound />;
 
-    return (
+    return loading ? (
+      <BarLoader />
+    ) : (
       <div className="topGrid">
         <h1 className="page-title">{article && article.title}</h1>
         <div className="articleContainer">
@@ -75,7 +82,9 @@ class SingleArticle extends Component {
           </div>
           {comments &&
             comments.map(comment => {
-              return (
+              return loadingComment ? (
+                <BarLoader />
+              ) : (
                 <Comments
                   user={this.props.user}
                   key={comment.comment_id}
@@ -103,7 +112,8 @@ class SingleArticle extends Component {
       .then(({ data }) => {
         this.setState({
           votes: data.article.votes,
-          article: data.article
+          article: data.article,
+          loading: false
         });
       })
       .catch(err => {
@@ -119,7 +129,8 @@ class SingleArticle extends Component {
       .get(`https://nc-knews777.herokuapp.com/api/articles/${id}/comments`)
       .then(({ data }) => {
         this.setState({
-          comments: data.comments
+          comments: data.comments,
+          loadingComment: false
         });
       });
   };

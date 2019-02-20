@@ -3,15 +3,18 @@ import { Link } from "@reach/router";
 import axios from "axios";
 import "../Style/Home.css";
 import "../App.css";
+import { BarLoader } from "react-css-loaders";
 
 class Home extends Component {
   state = {
     articles: [],
-    userArticles: []
+    userArticles: [],
+    loadingUserArticles: true,
+    loading: true
   };
   render() {
     const { user } = this.props;
-    const { articles, userArticles } = this.state;
+    const { articles, userArticles, loadingUserArticles, loading } = this.state;
     const threeUserArtile = userArticles.slice(0, 3);
     return (
       <div className="topGrid">
@@ -23,7 +26,9 @@ class Home extends Component {
             <h3 className="subHeadings">{`${user}`}'s most recent articles</h3>
           </div>
           {threeUserArtile.map(article => {
-            return (
+            return loadingUserArticles ? (
+              <BarLoader />
+            ) : (
               <div className="tcontainer" key={article.article_id}>
                 <Link
                   className="articleTitle"
@@ -57,7 +62,9 @@ class Home extends Component {
             <h3 className="subHeadings">Most Popular Artilces</h3>
           </div>
           {articles.map(article => {
-            return (
+            return loading ? (
+              <BarLoader />
+            ) : (
               <div className="tcontainer" key={article.article_id}>
                 <Link
                   className="articleTitle"
@@ -94,7 +101,8 @@ class Home extends Component {
           return article.author === this.props.user;
         });
         this.setState({
-          userArticles
+          userArticles,
+          loadingUserArticles: false
         });
       });
   };
@@ -106,7 +114,8 @@ class Home extends Component {
       )
       .then(({ data }) => {
         this.setState({
-          articles: data.articles
+          articles: data.articles,
+          loading: false
         });
       });
   };

@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "@reach/router";
+import { BarLoader } from "react-css-loaders";
 
 class SingleTopic extends Component {
   state = {
-    articles: []
+    articles: [],
+    loading: true
   };
   render() {
-    const { articles } = this.state;
+    const { articles, loading } = this.state;
     return (
       <div className="topGrid">
         <h1 className="page-title">{this.props.slug}</h1>
@@ -18,7 +20,9 @@ class SingleTopic extends Component {
             </h4>
           </div>
           {articles.map(article => {
-            return (
+            return loading ? (
+              <BarLoader />
+            ) : (
               <div className="tcontainer" key={article.article_id}>
                 <Link
                   className="articleTitle"
@@ -54,7 +58,8 @@ class SingleTopic extends Component {
       )
       .then(({ data }) => {
         this.setState({
-          articles: data.articles
+          articles: data.articles,
+          loading: false
         });
       });
   };

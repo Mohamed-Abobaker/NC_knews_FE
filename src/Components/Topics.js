@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "@reach/router";
+import { BarLoader } from "react-css-loaders";
 
 class Topics extends Component {
   state = {
-    topics: []
+    topics: [],
+    loading: true
   };
   render() {
-    const { topics } = this.state;
+    const { topics, loading } = this.state;
     return (
       <div className="topGrid">
         <h1 className="page-title">NC-News Topics</h1>
         <div className="topicGrid">
           {topics.map(topic => {
-            return (
+            return loading ? (
+              <BarLoader />
+            ) : (
               <div className="topic-container" key={topic.slug}>
                 <Link className="topicTitle" to={`${topic.slug}/articles`}>
                   {topic.slug}
@@ -35,7 +39,8 @@ class Topics extends Component {
       .get("https://nc-knews777.herokuapp.com/api/topics")
       .then(({ data }) => {
         this.setState({
-          topics: data.topics
+          topics: data.topics,
+          loading: false
         });
       });
   };

@@ -3,17 +3,19 @@ import axios from "axios";
 import { Link } from "@reach/router";
 import "../Style/Article.css";
 import "../App.css";
+import { BarLoader } from "react-css-loaders";
 
 class Articles extends Component {
   state = {
     articles: [],
     topics: [],
     chosenTopic: "All",
-    criteria: "created_at"
+    criteria: "created_at",
+    loading: true
   };
 
   render() {
-    const { articles, topics } = this.state;
+    const { articles, topics, loading } = this.state;
     // const { user } = this.props;
     return (
       <div className="topGrid">
@@ -64,7 +66,9 @@ class Articles extends Component {
             </h4>
           </div>
           {articles.map(article => {
-            return (
+            return loading ? (
+              <BarLoader />
+            ) : (
               <div className="tcontainer" key={article.article_id}>
                 <Link
                   className="articleTitle"
@@ -98,7 +102,8 @@ class Articles extends Component {
       .get("https://nc-knews777.herokuapp.com/api/articles?limit=1000000")
       .then(({ data }) => {
         this.setState({
-          articles: data.articles
+          articles: data.articles,
+          loading: false
         });
       });
   };
