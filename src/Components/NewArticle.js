@@ -6,12 +6,14 @@ import { BarLoader } from "react-css-loaders";
 class NewArticle extends Component {
   state = {
     topics: [],
-    selectedTopic: "",
+    selectedTopic: "coding",
     newSlugInput: "",
     newDescriptionInput: "",
     newArticleTitle: "",
     newArticleBody: "",
-    loading: true
+    loading: true,
+    newTopic: false,
+    topicIsAdded: false
   };
 
   render() {
@@ -21,77 +23,101 @@ class NewArticle extends Component {
       newDescriptionInput,
       newArticleBody,
       newArticleTitle,
-      loading
+      loading,
+      newTopic,
+      topicIsAdded
     } = this.state;
     return loading ? (
       <BarLoader />
     ) : (
-      <div key={"newArticlePage"} className="topGrid">
-        <h1 className="page-title">Write a new Article</h1>
-        <div key={"addNewArticle"} className="container">
-          <p>First choose the topic of your new article</p>
-          <select onChange={this.topicChange}>
-            <option defaultValue disabled key={"disabled"} value={null}>
-              Choose topic
-            </option>
-            {topics &&
-              topics.map(topic => {
-                return (
-                  <option key={topic.slug} value={topic.slug}>
-                    {topic.slug}
-                  </option>
-                );
-              })}
-          </select>
+      <div key={"newArticlePage"} className="newArticle">
+        <h1 className="page-title">Add a new Article</h1>
+        <div key={"addNewArticle"} className="newArticleTopicSelect">
+          <label>
+            Topic:
+            <select onChange={this.topicChange}>
+              <option defaultValue disabled key={"disabled"} value={null}>
+                Choose topic
+              </option>
+              {topics &&
+                topics.map(topic => {
+                  return (
+                    <option key={topic.slug} value={topic.slug}>
+                      {topic.slug.toUpperCase()}
+                    </option>
+                  );
+                })}
+            </select>
+          </label>
           <p>
             {`(psst if you wish to add an article to a topic that does not yet exist you can add a new topic using the form at the bottom of the page)`}
           </p>
+          <br />
           <form onSubmit={this.postNewArticle}>
             <input
+              className="newArticleTitleInput"
               required
-              placeholder="article title"
+              placeholder="ARTICLE TITLE"
               type="text"
               onChange={this.handleChange}
               value={newArticleTitle}
               id={"newArticleTitle"}
             />
-            <input
+            <br />
+            <textarea
+              className="newArticleBodyInput"
               required
-              placeholder="article body"
+              placeholder="ARTICLE BODY"
               type="text"
               onChange={this.handleChange}
               value={newArticleBody}
               id={"newArticleBody"}
             />
+            <br />
+            <br />
             <button type="submit">Submit new article</button>
             {/* {'finish this form for the article!'} */}
           </form>
-        </div>
-        <div className="container">
-          <p>
-            {" "}
-            If you wish to add a new topic please enter title and description
-            then submit
-          </p>
-          <form onSubmit={this.addTopic}>
-            <input
-              placeholder="New Topic Title"
-              type="text"
-              required
-              onChange={this.handleChange}
-              value={newSlugInput}
-              id={"newSlugInput"}
-            />
-            <input
-              required
-              placeholder="New Topic Description"
-              type="text"
-              onChange={this.handleChange}
-              value={newDescriptionInput}
-              id={"newDescriptionInput"}
-            />
-            <button type="submit">Submit new topic</button>
-          </form>
+
+          <br />
+          <br />
+          <button
+            type="button"
+            onClick={() => this.setState({ newTopic: !this.state.newTopic })}
+          >
+            {newTopic ? "Cancel" : "Add Topic"}
+          </button>
+          {newTopic && (
+            <div className="newArticleTopicSelect">
+              new topic
+              <form onSubmit={this.addTopic}>
+                <input
+                  className="newArticleTitleInput"
+                  placeholder="TOPIC TITLE"
+                  type="text"
+                  required
+                  onChange={this.handleChange}
+                  value={newSlugInput}
+                  id={"newSlugInput"}
+                />
+                <br />
+
+                <textarea
+                  className="newArticleBodyInput"
+                  required
+                  placeholder="TOPIC DESCRIPTION"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={newDescriptionInput}
+                  id={"newDescriptionInput"}
+                />
+                <br />
+                <br />
+                {topicIsAdded && <p>New topic successfully added</p>}
+                <button type="submit">Submit new topic</button>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -123,7 +149,8 @@ class NewArticle extends Component {
           this.setState({
             topics: [data.topic, ...this.state.topics],
             newSlugInput: "",
-            newDescriptionInput: ""
+            newDescriptionInput: "",
+            topicIsAdded: true
           });
         });
     }

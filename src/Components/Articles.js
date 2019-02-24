@@ -22,7 +22,7 @@ class Articles extends Component {
         <h1 className="page-title">NC-News Articles</h1>
         {/* <div className="container2"> */}
         <Link className="addArticle" to="/articles/new_article">
-          Create Article {/* Hey {user}, wanna add a new article? */}
+          Add Article {/* Hey {user}, wanna add a new article? */}
         </Link>{" "}
         {/* </div> */}
         <div className="container2">
@@ -31,14 +31,14 @@ class Articles extends Component {
               Filter Topic:&nbsp;
               <select onChange={this.assignTopic}>
                 <option key={"disabled"} value={null} defaultValue disabled>
-                  Choose topic
+                  CHOOSE TOPIC
                 </option>
-                <option value="All">All Topics</option>
+                <option value="All">ALL TOPICS</option>
                 {topics &&
                   topics.map(topic => {
                     return (
                       <option key={topic.slug} value={topic.slug}>
-                        {topic.slug}
+                        {topic.slug.toUpperCase()}
                       </option>
                     );
                   })}
@@ -50,7 +50,7 @@ class Articles extends Component {
               &nbsp;&nbsp;&nbsp;Sort by:&nbsp;
               <select onChange={this.assignSortBy}>
                 <option key={"disabled"} value={null} defaultValue disabled>
-                  Choose sort criteria
+                  CHOOSE SORT CRITERIA
                 </option>
                 <option value="created_at">Date created</option>
                 <option value="comment_count">Comment count</option>

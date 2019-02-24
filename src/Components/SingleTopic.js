@@ -10,7 +10,17 @@ class SingleTopic extends Component {
   };
   render() {
     const { articles, loading } = this.state;
-    return (
+    return !articles.length ? (
+      <div>
+        <h4>
+          Sorry, no articles yet available for this topic, but please feel free
+          to add one
+        </h4>
+        <Link className="addArticle" to="/articles/new_article">
+          Add Article
+        </Link>
+      </div>
+    ) : (
       <div className="topGrid">
         <h1 className="page-title">{this.props.slug}</h1>
         <div className="container">

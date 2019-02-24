@@ -1,41 +1,61 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "../App.css";
 
 class Auth extends Component {
   state = {
-    input: "",
-    hasError: false
+    users: [
+      "tickle122",
+      "happyamy2016",
+      "weegembump",
+      "grumpy19",
+      "cooljmessy",
+      "jessjelly"
+    ],
+    hasError: false,
+    chosenUser: "tickle122"
   };
   render() {
     const { user, children } = this.props;
-    const { hasError } = this.state;
+    const { hasError, users } = this.state;
     if (user) {
       return children;
     } else {
-      const { input } = this.state;
       return (
         <div>
           <div className="auth">
             <h2 className="page-title">NC-News Login</h2>
             <p>
-              <b>Please submit your username to login</b>
+              <b>Please choose a user to login with:</b>
             </p>
             {hasError && <p>Sorry this username does not exist</p>}
+            <br />
             <form onSubmit={this.handleSubmit}>
-              <input
+              {/* <input
                 required
                 onChange={this.handleChange}
                 placeholder={"username"}
                 type="text"
                 value={input}
-              />
-              <button type="submit">submit</button>
+              /> */}
+              <select onChange={this.assignUser}>
+                <option key={"disabled"} value={null} defaultValue disabled>
+                  CHOOSE USER
+                </option>
+                {users.map(singleUser => {
+                  return (
+                    <option key={singleUser} value={singleUser}>
+                      {singleUser}
+                    </option>
+                  );
+                })}
+              </select>
+
+              <button type="submit">Login</button>
             </form>
-            <p>
-              (Hiring partners and visitors please use 'jessjelly' as a username
-              login)
-            </p>
+            <br />
+            <br />
+            <br />
+            <br />
           </div>
         </div>
       );
@@ -51,22 +71,21 @@ class Auth extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { input } = this.state;
-    axios
-      .get(`https://nc-knews777.herokuapp.com/api/users/${input}`)
-      .then(({ data }) => {
-        if (data) {
-          this.props.setUser(input);
-          this.setState({
-            input: ""
-          });
-        }
-      })
-      .catch(err => {
-        this.setState({
-          hasError: true
-        });
-      });
+    const { chosenUser } = this.state;
+    // axios
+    //   .get(`https://nc-knews777.herokuapp.com/api/users/${input}`)
+    //   .then(({ data }) => {
+    //     if (data) {
+    this.props.setUser(chosenUser);
+
+    //   });
+    // }
+  };
+
+  assignUser = e => {
+    this.setState({
+      chosenUser: e.target.value
+    });
   };
 }
 

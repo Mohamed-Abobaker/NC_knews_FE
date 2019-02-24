@@ -15,7 +15,7 @@ class Home extends Component {
   render() {
     const { user } = this.props;
     const { articles, userArticles, loadingUserArticles, loading } = this.state;
-    const threeUserArtile = userArticles.slice(0, 3);
+    const threeUserArtile = userArticles.slice(0, 4);
     return (
       <div className="topGrid">
         <div>
@@ -49,11 +49,11 @@ class Home extends Component {
         </div>
         <div className="container2">
           <h4>
-            Hey {`${user}`} people seem to love your articles.
+            HEY {`${user}`} PEOPLE SEEM TO LOVE YOUR ARTICLES
             <br />
             <br />
             <Link className="addArticle" to="/articles/new_article">
-              Want to add another one?
+              WANT TO ADD ANOTHER ONE?
             </Link>
           </h4>
         </div>
