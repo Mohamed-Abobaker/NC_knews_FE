@@ -154,6 +154,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+  .container2 {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    margin: auto;
+    padding: 3px 7px;
+    text-transform: uppercase;
+  }
 }
 
 .subHeadings {
@@ -182,10 +190,8 @@
 }
 
 .container2 {
-  display: flex;
-  justify-content: space-evenly;
-  /* border-radius: 5px;
-  border-style: double; */
+  display: grid;
+  grid-template-columns: 1fr;
   background-color: white;
   margin: auto;
   padding: 3px 7px;
@@ -313,4 +319,35 @@
   font-size: 2em;
   /* background-color: black;
   border: red solid 3px; */
+}
+
+.likeButton {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+.likeButton:disabled {
+  background-color: grey;
+}
+
+.dislikeButton {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dislikeButton:disabled {
+  background-color: grey;
 }

@@ -48,6 +48,7 @@ class SingleArticle extends Component {
         <div className="articleContainer">
           <p>Article Votes: {article && article.votes + votesModifier}</p>
           <button
+            className="likeButton"
             disabled={votesModifier === 1}
             type="button"
             onClick={() => this.voteToArticle(votesModifier === -1 ? 2 : 1)}
@@ -55,6 +56,7 @@ class SingleArticle extends Component {
             Like
           </button>
           <button
+            className="dislikeButton"
             disabled={votesModifier === -1}
             type="button"
             onClick={() => this.voteToArticle(votesModifier === 1 ? -2 : -1)}
