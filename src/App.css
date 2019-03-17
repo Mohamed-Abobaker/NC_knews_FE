@@ -91,6 +91,14 @@
   margin: 10%;
 }
 
+.articleContainer {
+  padding: 10px;
+  border-radius: 5px;
+  border-style: double;
+  background-color: white;
+  margin: 10px;
+}
+
 .topicGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -200,14 +208,6 @@
   /* border-radius: 5px;
   border-style: double;
   background-color: white; */
-  margin: 10px;
-}
-
-.articleContainer {
-  padding: 10px;
-  border-radius: 5px;
-  border-style: double;
-  background-color: white;
   margin: 10px;
 }
 

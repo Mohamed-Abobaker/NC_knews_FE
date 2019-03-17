@@ -39,8 +39,8 @@ class SingleArticle extends Component {
       <BarLoader />
     ) : (
       <div className="topGrid">
-        <h1 className="page-title">{article && article.title}</h1>
         <div className="articleContainer">
+          <h1 className="page-title">{article && article.title}</h1>
           <p>{article && article.body}</p>
           <p>
             Posted by: '{article && article.author}' &nbsp;
