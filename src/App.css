@@ -79,6 +79,18 @@
   margin-right: 10px;
 }
 
+.commentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 0px;
+  border: 2px white;
+  border-style: solid;
+  background-color: whitesmoke;
+  min-height: 75px;
+  margin: 10%;
+}
+
 .topicGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -137,10 +149,19 @@
   }
 }
 @media only screen and (min-width: 850px) {
+  .articleContainer {
+    padding: 75px;
+    border-radius: 5px;
+    border-style: double;
+    background-color: white;
+    margin: 10px 50px;
+  }
+
   .containerTitle {
     grid-column: 1 / span 2;
     /* text-align: left; */
   }
+
   .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -183,6 +204,7 @@
 }
 
 .articleContainer {
+  padding: 10px;
   border-radius: 5px;
   border-style: double;
   background-color: white;
@@ -322,15 +344,21 @@
 }
 
 .likeButton {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
   border: none;
   color: white;
-  padding: 15px 32px;
+  /* padding: 10px 10px; */
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  margin: 2px;
+  text-transform: uppercase;
+  font-family: Lato, sans-serif;
+  border-radius: 5px;
+  height: 40px;
+  width: 100px;
 }
 .likeButton:disabled {
   background-color: grey;
@@ -340,14 +368,44 @@
   background-color: #f44336;
   border: none;
   color: white;
-  padding: 15px 32px;
+  /* padding: 10px 21px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px;
+  text-transform: uppercase;
+  font-family: Lato, sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+  width: 100px;
+}
+
+.dislikeButton:disabled {
+  background-color: grey;
+}
+
+.deleteButton {
+  background-color: darkgrey;
+  border: none;
+  color: white;
+  padding: 10px 21px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  margin: 2px;
+  text-transform: uppercase;
+  font-family: Lato, sans-serif;
+  border-radius: 5px;
+}
+.deleteButton:disabled {
+  background-color: grey;
 }
 
-.dislikeButton:disabled {
-  background-color: grey;
+.myFont {
+  text-transform: uppercase;
+  font-family: Lato, sans-serif;
 }

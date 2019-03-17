@@ -17,7 +17,6 @@ class Articles extends Component {
   render() {
     const { articles, topics, loading } = this.state;
     // const { user } = this.props;
-    console.log(this.props.children)
     return (
       <div className="topGrid">
         <h1 className="page-title">NC-News Articles</h1>

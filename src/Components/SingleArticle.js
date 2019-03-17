@@ -15,7 +15,8 @@ class SingleArticle extends Component {
     newComment: "",
     hasError: false,
     loading: true,
-    loadingComment: true
+    loadingComment: true,
+    showComments: false
   };
   render() {
     const {
@@ -25,7 +26,8 @@ class SingleArticle extends Component {
       newComment,
       hasError,
       loading,
-      loadingComment
+      loadingComment,
+      showComments
     } = this.state;
 
     const isUser =
@@ -41,48 +43,73 @@ class SingleArticle extends Component {
         <div className="articleContainer">
           <p>{article && article.body}</p>
           <p>
-            '{article && article.author}' posted on{" "}
+            Posted by: '{article && article.author}' &nbsp;
+            <br />
             {article && article.created_at.substring(0, 10)}
           </p>
-        </div>
-        <div className="articleContainer">
+          {/* </div>
+        <div className="articleContainer"> */}
           <p>Article Votes: {article && article.votes + votesModifier}</p>
-          <button
-            className="likeButton"
-            disabled={votesModifier === 1}
-            type="button"
-            onClick={() => this.voteToArticle(votesModifier === -1 ? 2 : 1)}
-          >
-            Like
-          </button>
-          <button
-            className="dislikeButton"
-            disabled={votesModifier === -1}
-            type="button"
-            onClick={() => this.voteToArticle(votesModifier === 1 ? -2 : -1)}
-          >
-            Dislike
-          </button>
+          {!isUser && (
+            <button
+              className="likeButton"
+              disabled={votesModifier === 1}
+              type="button"
+              onClick={() => this.voteToArticle(votesModifier === -1 ? 2 : 1)}
+            >
+              Like
+            </button>
+          )}
+          {!isUser && (
+            <button
+              className="dislikeButton"
+              disabled={votesModifier === -1}
+              type="button"
+              onClick={() => this.voteToArticle(votesModifier === 1 ? -2 : -1)}
+            >
+              Dislike
+            </button>
+          )}
           {isUser && (
-            <button type="button" onClick={this.deleteArticle}>
+            <button
+              className="deleteButton"
+              type="button"
+              onClick={this.deleteArticle}
+            >
               Delete Article
             </button>
           )}
         </div>
-        <div className="container">
-          <div className="containerTitle">
-            <h3>Comments</h3>
-            <form onSubmit={this.postNewComment}>
-              <input
-                required
-                onChange={this.handleChange}
-                type="text"
-                value={newComment}
-              />
-              <button type="sumbit">submit new comment</button>
-            </form>
-          </div>
-          {comments &&
+        <div>
+          <br />
+          <button
+            className="myFont"
+            type="button"
+            onClick={() =>
+              this.setState({ showComments: !this.state.showComments })
+            }
+          >
+            {showComments ? "Hide Comments" : "Show Comments"}
+          </button>
+          {showComments && (
+            <div className="containerTitle">
+              <h3>Comments</h3>
+              <form onSubmit={this.postNewComment}>
+                <input
+                  required
+                  onChange={this.handleChange}
+                  type="text"
+                  value={newComment}
+                />
+                <button className="myFont" type="sumbit">
+                  submit comment
+                </button>
+              </form>
+            </div>
+          )}
+
+          {showComments &&
+            comments &&
             comments.map(comment => {
               return loadingComment ? (
                 <BarLoader />

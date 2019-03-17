@@ -9,47 +9,59 @@ class Comments extends Component {
 
   render() {
     const { comment, commentModifier } = this.state;
-    const isUser =
+    const isAuthor =
       this.props.user === ((comment && comment.author) || comment.username)
         ? true
         : false;
     return (
-      <div className="tcontainer">
+      <div className="commentContainer">
         <p>
           {comment.author || comment.username} on{" "}
           {comment.created_at && comment.created_at.substring(0, 10)}
           <br /> <br />'{comment.body}'
         </p>
         <p>Comment Votes : {comment.votes + commentModifier}</p>
-        <button
-          disabled={commentModifier === 1}
-          type="button"
-          onClick={() =>
-            this.voteToComment(
-              comment.comment_id,
-              commentModifier === -1 ? 2 : 1
-            )
-          }
-        >
-          Like
-        </button>
-        <button
-          disabled={commentModifier === -1}
-          type="button"
-          onClick={() =>
-            this.voteToComment(
-              comment.comment_id,
-              commentModifier === 1 ? -2 : -1
-            )
-          }
-        >
-          Dislike
-        </button>
-        {isUser && (
-          <button type="button" onClick={this.deleteComment}>
-            Delete Comment
-          </button>
-        )}
+        <div>
+          {!isAuthor && (
+            <button
+              disabled={commentModifier === 1}
+              className="likeButton"
+              type="button"
+              onClick={() =>
+                this.voteToComment(
+                  comment.comment_id,
+                  commentModifier === -1 ? 2 : 1
+                )
+              }
+            >
+              Like
+            </button>
+          )}
+          {!isAuthor && (
+            <button
+              disabled={commentModifier === -1}
+              className="dislikeButton"
+              type="button"
+              onClick={() =>
+                this.voteToComment(
+                  comment.comment_id,
+                  commentModifier === 1 ? -2 : -1
+                )
+              }
+            >
+              Dislike
+            </button>
+          )}
+          {isAuthor && (
+            <button
+              className="deleteButton"
+              type="button"
+              onClick={this.deleteComment}
+            >
+              Delete Comment
+            </button>
+          )}
+        </div>
       </div>
     );
   }

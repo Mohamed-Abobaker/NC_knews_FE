@@ -75,13 +75,16 @@ class NewArticle extends Component {
             />
             <br />
             <br />
-            <button type="submit">Submit new article</button>
+            <button className="myFont" type="submit">
+              Submit new article
+            </button>
             {/* {'finish this form for the article!'} */}
           </form>
 
           <br />
           <br />
           <button
+            className="myFont"
             type="button"
             onClick={() => this.setState({ newTopic: !this.state.newTopic })}
           >
