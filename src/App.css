@@ -363,6 +363,9 @@
 .likeButton:disabled {
   background-color: grey;
 }
+.likeButton:hover:enabled {
+  background-color: #39853b;
+}
 
 .dislikeButton {
   background-color: #f44336;
@@ -386,6 +389,10 @@
   background-color: grey;
 }
 
+.dislikeButton:hover:enabled {
+  background-color: #cc372c;
+}
+
 .deleteButton {
   background-color: darkgrey;
   border: none;
@@ -402,6 +409,9 @@
   border-radius: 5px;
 }
 .deleteButton:disabled {
+  background-color: grey;
+}
+.deleteButton:hover {
   background-color: grey;
 }
 

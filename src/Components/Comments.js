@@ -16,11 +16,15 @@ class Comments extends Component {
     return (
       <div className="commentContainer">
         <p>
-          {comment.author || comment.username} on{" "}
+          {comment.body}
+          <br />
+          <br />
+          <br />
+          <i>{comment.author || comment.username}</i> -----{" "}
           {comment.created_at && comment.created_at.substring(0, 10)}
-          <br /> <br />'{comment.body}'
+          <br />
+          Comment Votes : {comment.votes + commentModifier}
         </p>
-        <p>Comment Votes : {comment.votes + commentModifier}</p>
         <div>
           {!isAuthor && (
             <button
