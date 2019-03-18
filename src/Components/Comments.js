@@ -15,11 +15,11 @@ class Comments extends Component {
         : false;
     return (
       <div className="commentContainer">
+        <p>{comment.body}</p>
         <p>
-          {comment.body}
+          {/* <br />
           <br />
-          <br />
-          <br />
+          <br /> */}
           <i>{comment.author || comment.username}</i> -----{" "}
           {comment.created_at && comment.created_at.substring(0, 10)}
           <br />

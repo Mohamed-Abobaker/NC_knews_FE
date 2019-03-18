@@ -41,9 +41,15 @@ class SingleArticle extends Component {
       <div className="topGrid">
         <div className="articleContainer">
           <h1 className="page-title">{article && article.title}</h1>
-          <p>{article && article.body}</p>
           <p>
-            Posted by: '{article && article.author}' &nbsp;
+            {article && article.body}
+            <br />
+            <br />
+            <br />
+            <br />
+          </p>
+          <p>
+            Posted by: <i>{article && article.author}</i>
             <br />
             {article && article.created_at.substring(0, 10)}
           </p>
