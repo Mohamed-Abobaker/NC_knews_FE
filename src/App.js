@@ -11,6 +11,7 @@ import Auth from "./Components/Auth";
 import NotFound from "./Components/NotFound";
 import Topics from "./Components/Topics";
 import SingleTopic from "./Components/SingleTopic";
+import Footer from "./Components/Footer";
 
 class App extends Component {
   state = {
@@ -36,6 +37,9 @@ class App extends Component {
               <NotFound default />
               {/* <LoginForm path="/test" /> */}
             </Router>
+          </div>
+          <div>
+            <Footer />
           </div>
         </Auth>
       </div>

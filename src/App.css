@@ -419,3 +419,38 @@
   text-transform: uppercase;
   font-family: Lato, sans-serif;
 }
+
+.footer {
+  /* add grid format to this
+  */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "footerLogo siteLinks ." ". . credentials";
+  background-color: black;
+  color: white;
+}
+
+.footerLogo {
+  padding: 10%;
+  grid-area: footerLogo;
+  text-align: center;
+}
+
+.footerSiteLinks {
+  grid-area: siteLinks;
+  text-align: center;
+}
+
+.footerCredentials {
+  grid-area: credentials;
+  text-align: center;
+}
+
+.siteLink {
+  text-decoration: none;
+  color: white;
+}
+.siteLink:hover {
+  color: red;
+}
